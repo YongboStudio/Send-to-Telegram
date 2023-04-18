@@ -20,5 +20,5 @@
     "matches": ["http://*/*", "https://*/*"],
     "js": ["content_script.js"]
   }],
-  "manifest_version": 2
+  "manifest_version": 3
 }
