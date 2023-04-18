@@ -37,31 +37,6 @@ push_message = function(source, tab, selection, device) {
     if (!combo_valid()) {
         return false;
     }
-
-    // var params = 'token=' + encodeURIComponent(localStorage.token) +
-    //              '&user=' + encodeURIComponent(localStorage.userkey) +
-    //              '&title=' + encodeURIComponent(tab.title) +
-    //              '&url=' + encodeURIComponent(tab.url.substring(0, 500)) +
-    //              '&url_title=' + encodeURIComponent('Open the link');
-
-    // if (source === 'badge' && localStorage.devices_badge) {
-    //     device = localStorage.devices_badge;
-    // }
-
-    // if (device) {
-    //     params += '&device=' + encodeURIComponent(device);
-    // }
-
-    // if (selection) {
-    //     params += '&message=' + encodeURIComponent(selection.substring(0, 512));
-    // } else {
-    //     params += '&message=' + encodeURIComponent(tab.url.substring(0, 500));
-    // }
-
-    // if (localStorage.sound) {
-    //     params += '&sound=' + encodeURIComponent(localStorage.sound);
-    // }
-
     if (selection) {
         var text = encodeURIComponent(selection.substring(0, 512));
     } else {
@@ -69,9 +44,7 @@ push_message = function(source, tab, selection, device) {
     }
 
     var req = new XMLHttpRequest();
-    var url = 'https://api.telegram.org/bot' + 
-                     localStorage.token + 
-                    '/sendMessage';
+    var url = 'https://api.telegram.org/bot' + localStorage.token + '/sendMessage';
     url += '?chat_id=' + encodeURIComponent(localStorage.userkey);
     url += '&text=' + text;
     url += encodeURIComponent('\n\nFrom: \n' + tab.title + '\n' + tab.url)
@@ -98,22 +71,7 @@ push_message = function(source, tab, selection, device) {
     return false;
 },
 
-// split_by_comma_list = function(value) {
-//     if (!value) {
-//         return [];
-//     }
-//     return value.split(',');
-// },
-// get_menu_devices = function() {
-//     var devices = split_by_comma_list(localStorage.devices_menu);
-//     if (!devices.length) {
-//         devices = split_by_comma_list(localStorage.devices_all);
-//     }
-//     return devices;
-// },
-
 setup_context_menus = function() {
-    // var devices = get_menu_devices(),
     var devices = ['Telegram Bot'],
         ctxs = ['page', 'link', 'image', 'selection'];
     chrome.contextMenus.removeAll();
